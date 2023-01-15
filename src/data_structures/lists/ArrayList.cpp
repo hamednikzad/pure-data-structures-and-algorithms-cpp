@@ -6,7 +6,6 @@
 #include <stdexcept>
 #include <iostream>
 #include <string>
-#include <utility>
 
 using std::cout;
 
@@ -22,7 +21,9 @@ ArrayList::~ArrayList() {
 }
 
 string ArrayList::getString(int index) {
-    ObjectType item = items[index];
+    if (index < 0 || index >= count) return {};
+
+    auto item = items[index];
 
     return getString(item);
 }
@@ -45,7 +46,6 @@ void ArrayList::addValue(const ObjectType &value) {
         checkCapacity(count + 1);
     }
 
-    //items[count++] = std::move(value);
     items[count++] = value;
 }
 
@@ -73,23 +73,23 @@ void ArrayList::changeCapacity(int newCapacity) {
     }
 
     if (newCapacity > 0) {
-        ObjectType *newItems = new ObjectType[newCapacity];
+        ObjectType *newItems;
+        newItems = new ObjectType[newCapacity];
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 newItems[i] = items[i];
             }
         }
         delete[] items;
-        items = newItems;
+        items = std::move(newItems);
     }
 
     capacity = newCapacity;
 }
 
 ObjectType ArrayList::getValue(int index) {
-    if (index < 0 || index >= count) {
-        return {};
-    }
+    if (index < 0 || index >= count) return {};
+
     return items[index];
 }
 
@@ -104,7 +104,7 @@ void ArrayList::clear() {
     count = 0;
 }
 
-int ArrayList::indexOf(ObjectType item) {
+int ArrayList::indexOf(const ObjectType& item) {
     for (int i = 0; i < count; i++) {
         if (items[i] == item) {
             return i;
@@ -126,11 +126,11 @@ void ArrayList::insert(int index, const ObjectType &value) {
             items[i] = items[i - 1];
         }
     }
-    items[index] = std::move(value);
+    items[index] = value;
     count++;
 }
 
-bool ArrayList::contains(ObjectType item) {
+bool ArrayList::contains(const ObjectType& item) {
     for (int i = 0; i < count; i++) {
         if (items[i] == item) {
             return true;

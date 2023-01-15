@@ -29,6 +29,7 @@ public:
 
 public:
     ArrayList(int capacity);
+
     ~ArrayList();
 
     void print();
@@ -41,11 +42,11 @@ public:
 
     void clear();
 
-    int indexOf(ObjectType item);
+    int indexOf(const ObjectType &item);
 
     void insert(int index, const ObjectType &value);
 
-    bool contains(ObjectType item);
+    bool contains(const ObjectType &item);
 };
 
 
