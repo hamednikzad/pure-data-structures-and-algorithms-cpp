@@ -40,12 +40,13 @@ void ArrayList::print() {
     cout << std::endl;
 }
 
-void ArrayList::addValue(ObjectType value) {
+void ArrayList::addValue(const ObjectType &value) {
     if (count == capacity) {
         checkCapacity(count + 1);
     }
 
-    items[count++] = std::move(value);
+    //items[count++] = std::move(value);
+    items[count++] = value;
 }
 
 void ArrayList::checkCapacity(int size) {
@@ -72,7 +73,7 @@ void ArrayList::changeCapacity(int newCapacity) {
     }
 
     if (newCapacity > 0) {
-        auto newItems = new ObjectType[capacity];
+        ObjectType *newItems = new ObjectType[newCapacity];
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 newItems[i] = items[i];
@@ -112,7 +113,7 @@ int ArrayList::indexOf(ObjectType item) {
     return -1;
 }
 
-void ArrayList::insert(int index, ObjectType item) {
+void ArrayList::insert(int index, const ObjectType &value) {
     if (index < 0 || index > count) {
         cout << "index out of range";
         return;
@@ -125,7 +126,7 @@ void ArrayList::insert(int index, ObjectType item) {
             items[i] = items[i - 1];
         }
     }
-    items[index] = std::move(item);
+    items[index] = std::move(value);
     count++;
 }
 

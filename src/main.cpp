@@ -3,7 +3,7 @@
 
 int main() {
     std::cout << "Hello, Data structures!" << std::endl;
-    ArrayList aList(5);
+    ArrayList aList(2);
     aList.addValue(12.5);
     aList.addValue("Hi");
     aList.addValue(12);

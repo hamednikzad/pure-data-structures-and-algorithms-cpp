@@ -14,7 +14,7 @@ using ObjectType = variant<string, int, float, double>;
 
 class ArrayList {
 private:
-    ObjectType *items;
+    ObjectType *items = nullptr;
 
 private:
     void checkCapacity(int size);
@@ -37,13 +37,13 @@ public:
 
     static std::string getString(ObjectType value);
 
-    void addValue(ObjectType value);
+    void addValue(const ObjectType &value);
 
     void clear();
 
     int indexOf(ObjectType item);
 
-    void insert(int index, ObjectType item);
+    void insert(int index, const ObjectType &value);
 
     bool contains(ObjectType item);
 };
