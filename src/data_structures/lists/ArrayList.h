@@ -21,7 +21,6 @@ private:
 
     void changeCapacity(int newCapacity);
 
-    void copyArray(ObjectType *array, int srcIndex, int dstIndex);
     std::string getString(int index);
 
 public:
@@ -30,10 +29,13 @@ public:
 
 public:
     ArrayList(int capacity);
+    ~ArrayList();
 
     void print();
 
     ObjectType getValue(int index);
+
+    static std::string getString(ObjectType value);
 
     void addValue(ObjectType value);
 
@@ -42,6 +44,8 @@ public:
     int indexOf(ObjectType item);
 
     void insert(int index, ObjectType item);
+
+    bool contains(ObjectType item);
 };
 
 
