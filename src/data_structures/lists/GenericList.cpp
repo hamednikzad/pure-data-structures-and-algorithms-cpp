@@ -41,7 +41,9 @@ void GenericList<T>::changeCapacity(int newCapacity) {
                 newItems[i] = items[i];
             }
         }
-        delete[] items;
+        if(items)
+            delete[] items;
+
         items = std::move(newItems);
     }
 

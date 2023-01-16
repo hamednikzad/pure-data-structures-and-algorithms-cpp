@@ -51,7 +51,9 @@ GenericList<T>::GenericList(int capacity): capacity(10), count(0) {
 
 template<class T>
 GenericList<T>::~GenericList() {
-    delete[] items;
+    if(items)
+        delete[] items;
+    items = nullptr;
 }
 
 template class GenericList<int>;

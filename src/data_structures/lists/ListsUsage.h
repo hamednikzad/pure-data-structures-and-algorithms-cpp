@@ -62,7 +62,7 @@ namespace list_usage{
 
     public:
         static void use() {
-//            arrayListUsage();
+            arrayListUsage();
 
             genericListUsage();
         }

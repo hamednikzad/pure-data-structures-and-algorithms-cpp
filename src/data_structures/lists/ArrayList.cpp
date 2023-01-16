@@ -17,7 +17,9 @@ ArrayList::ArrayList(int capacity) : capacity(capacity), count(0) {
 }
 
 ArrayList::~ArrayList() {
-    delete[] items;
+    if(items)
+        delete[] items;
+    items = nullptr;
 }
 
 string ArrayList::getString(int index) {
@@ -80,7 +82,9 @@ void ArrayList::changeCapacity(int newCapacity) {
                 newItems[i] = items[i];
             }
         }
-        delete[] items;
+        if(items)
+            delete[] items;
+
         items = std::move(newItems);
     }
 
