@@ -4,6 +4,7 @@
 
 #include "GenericList.h"
 #include "ArrayList.h"
+#include "SinglyLinkedList.h"
 #include <iostream>
 
 using namespace std;
@@ -60,11 +61,36 @@ namespace list_usage{
             cout << "GenericList end ---------------------" << std::endl;
         }
 
+        static void singlyLinkedList() {
+            cout << "SinglyLinkedList *************************" << std::endl;
+
+            auto list = SinglyLinkedList<int>();
+            list.addLast(1);
+            list.addLast(2);
+            list.addLast(3);
+            list.addFirst(0);
+            list.print();
+
+            cout << "Value at 2: " << list.getValueAtIndex(2) << std::endl;
+
+            cout << "Is list contains 12: " << list.contains(12) << std::endl;
+
+            cout << "Clearing List..." << std::endl;
+            list.clear();
+            list.print();
+
+            list.addFirst(5);
+            list.print();
+            cout << "SinglyLinkedList end ---------------------" << std::endl;
+        }
+
     public:
         static void use() {
-            arrayListUsage();
+//            arrayListUsage();
 
-            genericListUsage();
+//            genericListUsage();
+
+            singlyLinkedList();
         }
     };
 }

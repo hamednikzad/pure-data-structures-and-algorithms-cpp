@@ -22,7 +22,7 @@ public:
     int capacity;
 
 public:
-    GenericList(int capacity);
+    explicit GenericList(int capacity);
 
     ~GenericList();
 
@@ -43,7 +43,7 @@ public:
 
 template<class T>
 GenericList<T>::GenericList(int capacity): capacity(10), count(0) {
-    if(capacity <= 0)
+    if (capacity <= 0)
         throw std::invalid_argument("Capacity should be non negative");
 
     items = new T[capacity];
@@ -51,10 +51,11 @@ GenericList<T>::GenericList(int capacity): capacity(10), count(0) {
 
 template<class T>
 GenericList<T>::~GenericList() {
-    if(items)
-        delete[] items;
+    delete[] items;
     items = nullptr;
 }
 
-template class GenericList<int>;
+template
+class GenericList<int>;
+
 #endif //PURE_DATA_STRUCTURES_AND_ALGORITHMS_CPP_GENERICLIST_H

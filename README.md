@@ -5,3 +5,4 @@ Data structures and algorithms implementation in pure C++!
 - Lists:
     - Array List
     - Generic List
+    - Generic Singly Linked List
