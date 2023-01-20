@@ -5,11 +5,12 @@
 #include "GenericList.h"
 #include "ArrayList.h"
 #include "SinglyLinkedList.h"
+#include "DoublyLinkedList.h"
 #include <iostream>
 
 using namespace std;
 
-namespace list_usage{
+namespace list_usage {
     class ListUsage {
         static void arrayListUsage() {
             cout << "ArrayList *************************" << std::endl;
@@ -61,6 +62,10 @@ namespace list_usage{
             cout << "GenericList end ---------------------" << std::endl;
         }
 
+        static void showInt(int value) {
+            cout << value << ", ";
+        }
+
         static void singlyLinkedList() {
             cout << "SinglyLinkedList *************************" << std::endl;
 
@@ -75,6 +80,15 @@ namespace list_usage{
 
             cout << "Is list contains 12: " << list.contains(12) << std::endl;
 
+            cout << "traverse: ";
+            list.traverse(showInt);
+            cout << std::endl;
+            cout << "traverse lambda way: ";
+            list.traverse([](int x)-> void {
+                cout << x << ", ";
+            });
+            cout << std::endl;
+
             cout << "Clearing List..." << std::endl;
             list.clear();
             list.print();
@@ -84,13 +98,47 @@ namespace list_usage{
             cout << "SinglyLinkedList end ---------------------" << std::endl;
         }
 
+        static void doublyLinkedList() {
+            cout << "DoublyLinkedList *************************" << std::endl;
+
+            auto list = DoublyLinkedList<int>();
+            list.addLast(1);
+            list.addLast(2);
+            list.addLast(3);
+            list.addFirst(0);
+            list.print();
+
+            cout << "Value at 2: " << list.getValueAtIndex(2) << std::endl;
+
+            cout << "Is list contains 12: " << list.contains(12) << std::endl;
+
+            cout << "traverse: ";
+            list.traverse(showInt);
+            cout << std::endl;
+            cout << "traverse lambda way: ";
+            list.traverse([](int x)-> void {
+                cout << x << ", ";
+            });
+            cout << std::endl;
+
+            cout << "Clearing List..." << std::endl;
+            list.clear();
+            list.print();
+
+            list.addFirst(5);
+            list.print();
+            cout << "DoublyLinkedList end ---------------------" << std::endl;
+        }
+
     public:
         static void use() {
 //            arrayListUsage();
 
 //            genericListUsage();
 
-            singlyLinkedList();
+//            singlyLinkedList();
+
+            doublyLinkedList();
         }
     };
 }

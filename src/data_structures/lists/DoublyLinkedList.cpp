@@ -1,22 +1,22 @@
 //
-// Created by Hamed on 1/19/2023.
+// Created by Hamed on 1/20/2023.
 //
 
 #include <iostream>
-#include "SinglyLinkedList.h"
+#include "DoublyLinkedList.h"
 
 template<class T>
-SinglyLinkedList<T>::SinglyLinkedList() : count(0) {}
+DoublyLinkedList<T>::DoublyLinkedList() : count(0) {}
 
 template<class T>
-SinglyLinkedList<T>::~SinglyLinkedList() {
+DoublyLinkedList<T>::~DoublyLinkedList() {
     std::cout << "Destructor" << std::endl;
 
     clear();
 }
 
 template<class T>
-singlyLinkedListNode<T> *SinglyLinkedList<T>::find(T data) {
+doublyLinkedListNode<T> *DoublyLinkedList<T>::find(T data) {
     if (!head)
         return {};
 
@@ -32,8 +32,8 @@ singlyLinkedListNode<T> *SinglyLinkedList<T>::find(T data) {
 }
 
 template<class T>
-void SinglyLinkedList<T>::addFirst(T data) {
-    auto newNode = new singlyLinkedListNode<T>{data};
+void DoublyLinkedList<T>::addFirst(T data) {
+    auto newNode = new doublyLinkedListNode<T>{data};
 
     if (!head) {
         head = newNode;
@@ -42,13 +42,14 @@ void SinglyLinkedList<T>::addFirst(T data) {
     }
 
     newNode->Next = head;
+    head->Prev = newNode;
     head = newNode;
     count++;
 }
 
 template<class T>
-void SinglyLinkedList<T>::addLast(T data) {
-    auto newNode = new singlyLinkedListNode<T>{data};
+void DoublyLinkedList<T>::addLast(T data) {
+    auto newNode = new doublyLinkedListNode<T>{data};
 
     if (!head) {
         head = newNode;
@@ -59,12 +60,13 @@ void SinglyLinkedList<T>::addLast(T data) {
     while (current->Next) {
         current = current->Next;
     }
+    newNode->Prev = current;
     current->Next = newNode;
     count++;
 }
 
 template<class T>
-void SinglyLinkedList<T>::remove(int index) {
+void DoublyLinkedList<T>::remove(int index) {
     if (!head || index < 0 || index >= count) {
         return;
     }
@@ -73,6 +75,9 @@ void SinglyLinkedList<T>::remove(int index) {
         auto temp = head->Next;
         delete head;
         head = temp;
+        if (head) {
+            head->Prev = 0;
+        }
     } else {
         auto current = head;
         auto prev = head;
@@ -84,6 +89,9 @@ void SinglyLinkedList<T>::remove(int index) {
         }
 
         prev->Next = current->Next;
+        if (current->Next) {
+            current->Next->Prev = prev;
+        }
         delete current;
     }
 
@@ -91,23 +99,27 @@ void SinglyLinkedList<T>::remove(int index) {
 }
 
 template<class T>
-void SinglyLinkedList<T>::removeLast() {
+void DoublyLinkedList<T>::removeLast() {
     remove(count - 1);
 }
 
 template<class T>
-void SinglyLinkedList<T>::removeFirst() {
+void DoublyLinkedList<T>::removeFirst() {
     remove(0);
 }
 
 template<class T>
-bool SinglyLinkedList<T>::removeValue(T data) {
+bool DoublyLinkedList<T>::removeValue(T data) {
     if (!head) {
         return false;
     }
 
     if (head->Data == data) {
         head = head->Next;
+
+        if (head) {
+            head->Prev = 0;
+        }
 
         count--;
         return true;
@@ -118,6 +130,10 @@ bool SinglyLinkedList<T>::removeValue(T data) {
     while (current) {
         if (current->Data == data) {
             prev->Next = current->Next;
+
+            if (current->Next) {
+                current->Next->Prev = prev;
+            }
 
             count--;
             return true;
@@ -131,7 +147,7 @@ bool SinglyLinkedList<T>::removeValue(T data) {
 }
 
 template<class T>
-T SinglyLinkedList<T>::getValueAtIndex(int index) {
+T DoublyLinkedList<T>::getValueAtIndex(int index) {
     if (!head || index < 0 || index >= count) {
         return {};
     }
@@ -146,7 +162,7 @@ T SinglyLinkedList<T>::getValueAtIndex(int index) {
 }
 
 template<class T>
-void SinglyLinkedList<T>::print() {
+void DoublyLinkedList<T>::print() {
     printf("Count:%d =>\t", count);
     auto current = head;
     std::string sep = ", ";
@@ -161,7 +177,7 @@ void SinglyLinkedList<T>::print() {
 }
 
 template<class T>
-void SinglyLinkedList<T>::traverse(void (*func)(int)) {
+void DoublyLinkedList<T>::traverse(void (*func)(int)) {
     if (!head) {
         return;
     }
@@ -173,7 +189,7 @@ void SinglyLinkedList<T>::traverse(void (*func)(int)) {
 }
 
 template<class T>
-void SinglyLinkedList<T>::clear() {
+void DoublyLinkedList<T>::clear() {
     if (!head)
         return;
 

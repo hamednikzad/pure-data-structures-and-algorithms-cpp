@@ -8,18 +8,18 @@
 #include <functional>
 
 template<typename T>
-struct linkedListNode {
+struct singlyLinkedListNode {
     T Data;
-    linkedListNode<T> *Next;
+    singlyLinkedListNode<T> *Next;
 };
 
 template<class T>
 class SinglyLinkedList {
 private:
-    linkedListNode<T> *head;
+    singlyLinkedListNode<T> *head;
 
 private:
-    linkedListNode<T> *find(T data);
+    singlyLinkedListNode<T> *find(T data);
 
 public:
     int count;
@@ -49,12 +49,12 @@ public:
 
     void print();
 
-    void traverse(std::function<void(T)> func);
+    void traverse(void (*func)(int));
 
     void clear();
 };
 
 
-template struct linkedListNode<int>;
+template struct singlyLinkedListNode<int>;
 template class SinglyLinkedList<int>;
 #endif //PURE_DATA_STRUCTURES_AND_ALGORITHMS_CPP_SINGLYLINKEDLIST_H
