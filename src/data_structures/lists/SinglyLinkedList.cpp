@@ -6,7 +6,9 @@
 #include "SinglyLinkedList.h"
 
 template<class T>
-SinglyLinkedList<T>::SinglyLinkedList() : count(0) {}
+SinglyLinkedList<T>::SinglyLinkedList() : count(0) {
+    head = nullptr;
+}
 
 template<class T>
 SinglyLinkedList<T>::~SinglyLinkedList() {

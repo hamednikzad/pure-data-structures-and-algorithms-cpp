@@ -136,9 +136,9 @@ namespace list_usage {
 
 //            genericListUsage();
 
-//            singlyLinkedList();
+            singlyLinkedList();
 
-            doublyLinkedList();
+//            doublyLinkedList();
         }
     };
 }

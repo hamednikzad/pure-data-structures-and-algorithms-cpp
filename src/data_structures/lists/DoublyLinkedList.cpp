@@ -6,7 +6,9 @@
 #include "DoublyLinkedList.h"
 
 template<class T>
-DoublyLinkedList<T>::DoublyLinkedList() : count(0) {}
+DoublyLinkedList<T>::DoublyLinkedList() : count(0) {
+    head = nullptr;
+}
 
 template<class T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
